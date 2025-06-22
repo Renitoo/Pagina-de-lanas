@@ -17,6 +17,7 @@
     .contenido {
       flex: 3;
       padding: 20px;
+      overflow-y: auto;
     }
 
     header {
@@ -25,6 +26,21 @@
       text-align: center;
       padding: 20px;
       margin-bottom: 20px;
+    }
+
+    nav {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #cc8b79;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    nav a:hover {
+      text-decoration: underline;
     }
 
     .seccion {
@@ -51,6 +67,7 @@
 
     .producto img {
       max-width: 100%;
+      border-radius: 8px;
     }
 
     .boton {
@@ -61,6 +78,10 @@
       border-radius: 5px;
       margin-top: 10px;
       cursor: pointer;
+      font-weight: bold;
+    }
+    .boton:hover {
+      background-color: #b0755f;
     }
 
     footer {
@@ -69,6 +90,7 @@
       text-align: center;
       padding: 15px;
       margin-top: 20px;
+      font-size: 14px;
     }
 
     .carrito {
@@ -76,20 +98,35 @@
       background-color: #fff3eb;
       padding: 20px;
       border-left: 2px solid #cc8b79;
-      min-width: 250px;
+      min-width: 280px;
+      max-height: 100vh;
+      overflow-y: auto;
     }
 
     .carrito h2 {
       margin-top: 0;
+      text-align: center;
+      color: #cc8b79;
     }
 
     .item-carrito {
       border-bottom: 1px solid #ccc;
       padding: 10px 0;
+      font-size: 14px;
     }
 
     .item-carrito button {
       margin: 0 5px;
+      background: #cc8b79;
+      border: none;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 3px 7px;
+    }
+    .item-carrito button:hover {
+      background: #b0755f;
     }
 
     /* Botón flotante WhatsApp */
@@ -149,7 +186,7 @@
       padding: 15px;
       border-radius: 10px;
       box-shadow: 2px 2px 12px rgba(0,0,0,0.3);
-      width: 260px;
+      width: 280px;
       display: none;
       z-index: 1002;
       font-size: 14px;
@@ -201,6 +238,14 @@
       <p>🧶 Tienda de Lanas y Tejidos hechos con amor 🧵</p>
     </header>
 
+    <nav>
+      <a href="#lanas">Lanas</a>
+      <a href="#gorros">Gorros</a>
+      <a href="#chalecos">Chalecos</a>
+      <a href="#chalecosSinMangas">Chalecos sin mangas</a>
+      <a href="#cuellos">Cuellos</a>
+    </nav>
+
     <!-- Lanas -->
     <div class="seccion" id="lanas">
       <h2>🧶 Lanas</h2>
@@ -218,20 +263,47 @@
       </div>
     </div>
 
-    <!-- Tejidos -->
-    <div class="seccion" id="tejidos">
-      <h2>🧵 Tejidos</h2>
+    <!-- Gorros -->
+    <div class="seccion" id="gorros">
+      <h2>🧢 Gorros</h2>
       <div class="producto">
         <img src="https://via.placeholder.com/200x150?text=Gorro+Tejido" alt="Gorro tejido" />
         <h3>Gorro tejido</h3>
         <p>$5.000</p>
         <button class="boton" onclick="agregarAlCarrito('Gorro tejido')">Agregar al carrito</button>
       </div>
+    </div>
+
+    <!-- Chalecos -->
+    <div class="seccion" id="chalecos">
+      <h2>🧥 Chalecos</h2>
       <div class="producto">
-        <img src="https://via.placeholder.com/200x150?text=Bufanda+Tejida" alt="Bufanda tejida" />
-        <h3>Bufanda tejida</h3>
+        <img src="https://via.placeholder.com/200x150?text=Chaleco+Tejido" alt="Chaleco tejido" />
+        <h3>Chaleco tejido</h3>
+        <p>$12.000</p>
+        <button class="boton" onclick="agregarAlCarrito('Chaleco tejido')">Agregar al carrito</button>
+      </div>
+    </div>
+
+    <!-- Chalecos sin mangas -->
+    <div class="seccion" id="chalecosSinMangas">
+      <h2>🧥 Chalecos sin mangas</h2>
+      <div class="producto">
+        <img src="https://via.placeholder.com/200x150?text=Chaleco+sin+mangas" alt="Chaleco sin mangas" />
+        <h3>Chaleco sin mangas</h3>
+        <p>$10.000</p>
+        <button class="boton" onclick="agregarAlCarrito('Chaleco sin mangas')">Agregar al carrito</button>
+      </div>
+    </div>
+
+    <!-- Cuellos -->
+    <div class="seccion" id="cuellos">
+      <h2>🧣 Cuellos</h2>
+      <div class="producto">
+        <img src="https://via.placeholder.com/200x150?text=Cuello+Tejido" alt="Cuello tejido" />
+        <h3>Cuello tejido</h3>
         <p>$6.000</p>
-        <button class="boton" onclick="agregarAlCarrito('Bufanda tejida')">Agregar al carrito</button>
+        <button class="boton" onclick="agregarAlCarrito('Cuello tejido')">Agregar al carrito</button>
       </div>
     </div>
 
@@ -247,11 +319,9 @@
       <p>Tu carrito está vacío.</p>
     </div>
 
-    <div style="margin-top: 20px;">
-      <button onclick="enviarPorWhatsApp()" style="background:#25d366; color:#fff; border:none; padding:10px; border-radius:6px; width:100%; cursor:pointer; font-weight:bold; font-size:16px;">
-        Enviar pedido por WhatsApp
-      </button>
-    </div>
+    <button onclick="enviarPorWhatsApp()" style="background:#25d366; color:#fff; border:none; padding:10px; border-radius:6px; width:100%; cursor:pointer; font-weight:bold; font-size:16px; margin-top:20px;">
+      Enviar pedido por WhatsApp
+    </button>
   </div>
 
   <!-- Botón flotante WhatsApp para mensaje personalizado -->
@@ -339,7 +409,7 @@
         mensaje += `- ${cantidad} x ${nombre}\n`;
       });
 
-      const numero = "56988612195"; // Cambia aquí por tu número real (sin +)
+      const numero = "56988612195"; // Número sin +
       const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
       window.open(url, "_blank");
     }
@@ -350,7 +420,6 @@
     const overlay = document.getElementById('overlayPersonalizado');
 
     btnWhatsapp.addEventListener('click', () => {
-      // Alternar visibilidad del contenedor de mensaje
       if (mensajeContainer.style.display === 'block') {
         mensajeContainer.style.display = 'none';
         overlay.style.display = 'none';
@@ -361,7 +430,6 @@
       }
     });
 
-    // Cerrar cuadro mensaje al hacer clic fuera
     overlay.addEventListener('click', () => {
       mensajeContainer.style.display = 'none';
       overlay.style.display = 'none';
@@ -373,10 +441,9 @@
         alert("Por favor, escribe un mensaje antes de enviar.");
         return;
       }
-      const numero = "56988612195"; // Número para mensaje personalizado (sin +)
+      const numero = "56988612195"; // Número sin +
       const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
       window.open(url, "_blank");
-      // Opcional: limpiar y ocultar el cuadro
       document.getElementById('mensajePersonalizado').value = '';
       mensajeContainer.style.display = 'none';
       overlay.style.display = 'none';
