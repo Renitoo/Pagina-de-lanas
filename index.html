@@ -1,506 +1,1268 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Rayén y Küruf - Tienda de Lanas y Tejidos</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #fdf6f0;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rayén y Küruf - Tienda de Lanas y Tejidos</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente más moderna */
+            background-color: #fdf6f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+            flex-direction: column; /* Para que el footer se quede abajo */
+        }
 
-    .contenido {
-      flex: 1;
-      padding: 20px;
-      margin-right: 320px; /* espacio para carrito cerrado, ajusta si cambias carrito */
-      transition: margin-right 0.3s ease;
-    }
+        /* --- Estilos para la barra de navegación fija --- */
+        .navbar {
+            background-color: #cc8b79;
+            color: white;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1050; /* Mayor que el carrito y el whatsapp */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Permite que los elementos se envuelvan si no caben */
+        }
 
-    .contenido.carrito-abierto {
-      margin-right: 320px;
-    }
+        .navbar .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            flex-grow: 1; /* Permite que el logo ocupe el espacio disponible */
+        }
 
-    header {
-      background-color: #cc8b79;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
 
-    .seccion {
-      margin-bottom: 30px;
-    }
+        .navbar a:hover {
+            color: #ffead0; /* Un tono más claro al pasar el ratón */
+        }
 
-    .seccion h2 {
-      border-bottom: 2px solid #cc8b79;
-      padding-bottom: 10px;
-      margin-bottom: 15px;
-    }
+        /* --- Estilos para el botón de hamburguesa (solo en móvil) --- */
+        .menu-toggle {
+            display: none; /* Oculto por defecto en desktop */
+            font-size: 2em;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 5px 10px;
+            z-index: 1060; /* Asegurarse de que esté encima de todo */
+        }
 
-    .producto {
-      text-align: center;
-      background-color: white;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      margin: 20px;
-      padding: 15px;
-      width: 250px;
-      display: inline-block;
-      vertical-align: top;
-    }
+        /* --- Estilos para los enlaces de navegación --- */
+        .nav-links {
+            display: flex; /* Por defecto en desktop, los enlaces se muestran en línea */
+            align-items: center;
+        }
 
-    .producto img {
-      max-width: 100%;
-    }
+        /* Contenido principal de la página */
+        .contenido {
+            flex: 1;
+            padding: 20px;
+            margin-right: 320px; /* Espacio para carrito cerrado, ajusta si cambias carrito */
+            transition: margin-right 0.3s ease;
+            max-width: 1200px; /* Ancho máximo para el contenido principal */
+            margin-left: auto;
+            margin-right: auto;
+            padding-top: 70px; /* Espacio para la barra de navegación fija */
+        }
 
-    .boton {
-      background-color: #cc8b79;
-      color: white;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      margin-top: 10px;
-      cursor: pointer;
-    }
+        .contenido.carrito-abierto {
+            margin-right: 320px;
+        }
 
-    footer {
-      background-color: #cc8b79;
-      color: white;
-      text-align: center;
-      padding: 15px;
-      margin-top: 20px;
-    }
+        header {
+            background-color: #cc8b79;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px; /* Bordes redondeados */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
 
-    /* Carrito sidebar */
-    .carrito {
-      position: fixed;
-      top: 0;
-      right: -320px;
-      width: 320px;
-      height: 100%;
-      background-color: #fff3eb;
-      padding: 20px;
-      border-left: 2px solid #cc8b79;
-      box-shadow: -3px 0 8px rgba(0,0,0,0.15);
-      transition: right 0.3s ease;
-      overflow-y: auto;
-      z-index: 1000;
-    }
+        /* --- Estilos para la sección Hero --- */
+        .hero-section {
+            background-image: url('https://via.placeholder.com/1200x300?text=Tejidos+con+el+Corazón+del+Sur'); /* Imagen de fondo atractiva */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
 
-    .carrito.abierto {
-      right: 0;
-    }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.3); /* Overlay oscuro para legibilidad del texto */
+            z-index: 1;
+        }
 
-    .carrito h2 {
-      margin-top: 0;
-    }
+        .hero-section h1, .hero-section p {
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Sombra para el texto */
+        }
 
-    .item-carrito {
-      border-bottom: 1px solid #ccc;
-      padding: 10px 0;
-    }
+        .hero-section h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+        }
 
-    .item-carrito button {
-      margin: 0 5px;
-      cursor: pointer;
-    }
+        .hero-section p {
+            font-size: 1.5em;
+        }
 
-    .boton-seguir {
-      background-color: #cc8b79;
-      color: white;
-      border: none;
-      padding: 10px;
-      width: 100%;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      margin-top: 15px;
-      font-size: 16px;
-    }
+        /* Secciones de productos */
+        .seccion {
+            margin-bottom: 40px;
+        }
 
-    /* Botón fijo de carrito */
-    #btnToggleCarrito {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #cc8b79;
-      color: white;
-      border: none;
-      padding: 15px 18px;
-      border-radius: 50%;
-      font-size: 20px;
-      cursor: pointer;
-      box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-      z-index: 1100;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      user-select: none;
-      transition: background-color 0.3s ease;
-    }
+        .seccion h2 {
+            border-bottom: 2px solid #cc8b79;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            color: #cc8b79;
+            font-size: 2em;
+        }
 
-    #btnToggleCarrito:hover {
-      background-color: #a56349;
-    }
+        /* --- Mejoras en los productos (tarjetas individuales) --- */
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+            gap: 30px; /* Espacio entre productos */
+            justify-content: center;
+        }
 
-    /* Botón flotante WhatsApp */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 20px;
-      right: 80px;
-      background-color: #25d366;
-      padding: 12px;
-      border-radius: 50%;
-      box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-      z-index: 1100;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background-color 0.3s;
-    }
+        .producto {
+            text-align: center;
+            background-color: white;
+            border: 1px solid #e0e0e0; /* Borde más suave */
+            border-radius: 12px; /* Bordes más redondeados */
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* Sombra más pronunciada */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+            display: flex; /* Para mejor alineación del contenido */
+            flex-direction: column;
+            justify-content: space-between; /* Espacia el contenido */
+        }
 
-    .whatsapp-float:hover {
-      background-color: #1ebe57;
-    }
+        .producto:hover {
+            transform: translateY(-5px); /* Pequeño levantamiento al pasar el ratón */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
 
-    .whatsapp-float img {
-      width: 35px;
-      height: 35px;
-    }
+        .producto img {
+            max-width: 100%;
+            height: 200px; /* Altura fija para las imágenes */
+            object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
 
-    .whatsapp-float span {
-      position: absolute;
-      bottom: 70px;
-      right: 80px;
-      background-color: #333;
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 14px;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-      max-width: 200px;
-      text-align: center;
-    }
+        .producto h3 {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 8px;
+        }
 
-    .whatsapp-float:hover span {
-      opacity: 1;
-      pointer-events: auto;
-    }
+        .producto p {
+            font-size: 1.3em;
+            color: #555;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
 
-    /* Caja para mensaje personalizado */
-    #mensajePersonalizadoContainer {
-      position: fixed;
-      bottom: 80px;
-      right: 20px;
-      background: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 2px 2px 12px rgba(0,0,0,0.3);
-      width: 260px;
-      display: none;
-      z-index: 1101;
-      font-size: 14px;
-    }
+        .boton {
+            background-color: #cc8b79;
+            color: white;
+            padding: 12px 20px; /* Más padding */
+            border: none;
+            border-radius: 8px;
+            margin-top: auto; /* Empuja el botón hacia abajo */
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
 
-    #mensajePersonalizadoContainer textarea {
-      width: 100%;
-      height: 80px;
-      resize: none;
-      padding: 8px;
-      font-size: 14px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      font-family: Arial, sans-serif;
-    }
+        .boton:hover {
+            background-color: #a56349;
+        }
 
-    #mensajePersonalizadoContainer button {
-      background-color: #25d366;
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      width: 100%;
-      font-size: 15px;
-    }
+        /* Footer */
+        footer {
+            background-color: #cc8b79;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            flex-shrink: 0; /* Evita que el footer se encoja */
+        }
 
-    #mensajePersonalizadoContainer button:hover {
-      background-color: #1ebe57;
-    }
+        footer a {
+            color: white;
+            text-decoration: underline;
+        }
 
-    /* Overlay para cerrar con clic afuera */
-    #overlayPersonalizado {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: transparent;
-      z-index: 1000;
-    }
-  </style>
+        /* Carrito sidebar */
+        .carrito {
+            position: fixed;
+            top: 0;
+            right: -320px;
+            width: 320px;
+            height: 100%;
+            background-color: #fff3eb;
+            padding: 20px;
+            border-left: 2px solid #cc8b79;
+            box-shadow: -3px 0 8px rgba(0,0,0,0.15);
+            transition: right 0.3s ease;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .carrito.abierto {
+            right: 0;
+        }
+
+        .carrito h2 {
+            margin-top: 0;
+            color: #cc8b79;
+        }
+
+        .item-carrito {
+            border-bottom: 1px dashed #ccc; /* Línea más suave */
+            padding: 10px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .item-carrito span {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .item-carrito .acciones {
+            display: flex;
+            gap: 5px;
+            margin-top: 5px;
+        }
+
+        .item-carrito button {
+            background-color: #cc8b79;
+            color: white;
+            border: none;
+            padding: 5px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.2s;
+        }
+
+        .item-carrito button.eliminar {
+            background-color: #e74c3c; /* Botón eliminar en rojo */
+        }
+
+        .item-carrito button:hover {
+            opacity: 0.8;
+        }
+
+        .carrito-vacio {
+            text-align: center;
+            color: #888;
+            padding: 20px 0;
+        }
+
+        .total-carrito {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid #cc8b79;
+            font-size: 1.4em;
+            font-weight: bold;
+            text-align: right;
+            color: #333;
+        }
+
+        .boton-seguir {
+            background-color: #cc8b79;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .boton-seguir:hover {
+            background-color: #a56349;
+        }
+
+        /* Botón fijo de carrito */
+        #btnToggleCarrito {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #cc8b79;
+            color: white;
+            border: none;
+            padding: 15px 18px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            z-index: 1100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            transition: background-color 0.3s ease;
+        }
+
+        #btnToggleCarrito:hover {
+            background-color: #a56349;
+        }
+
+        /* Botón flotante WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 80px;
+            background-color: #25d366;
+            padding: 12px;
+            border-radius: 50%;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            z-index: 1100;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #1ebe57;
+        }
+
+        .whatsapp-float img {
+            width: 35px;
+            height: 35px;
+        }
+
+        .whatsapp-float span {
+            position: absolute;
+            bottom: 70px; /* Ajustado para que el tooltip esté más cerca */
+            right: 80px;
+            background-color: #333;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            max-width: 200px;
+            text-align: center;
+            transform: translateX(50%); /* Centrar tooltip horizontalmente */
+        }
+
+        .whatsapp-float:hover span {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Caja para mensaje personalizado */
+        #mensajePersonalizadoContainer {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 12px rgba(0,0,0,0.3);
+            width: 280px; /* Ancho ajustado */
+            display: none;
+            z-index: 1101;
+            font-size: 14px;
+        }
+
+        #mensajePersonalizadoContainer textarea {
+            width: calc(100% - 16px); /* Ajuste para padding */
+            height: 90px;
+            resize: vertical; /* Permite redimensionar verticalmente */
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-family: Arial, sans-serif;
+        }
+
+        #mensajePersonalizadoContainer button {
+            background-color: #25d366;
+            color: white;
+            border: none;
+            padding: 10px 15px; /* Más padding */
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            font-size: 15px;
+            transition: background-color 0.3s;
+        }
+
+        #mensajePersonalizadoContainer button:hover {
+            background-color: #1ebe57;
+        }
+
+        /* Overlay para cerrar con clic afuera */
+        #overlayPersonalizado {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: transparent; /* Fondo transparente */
+            z-index: 1000;
+        }
+
+        /* --- Estilos para el modal de detalles del producto --- */
+        .modal {
+            display: none; /* Oculto por defecto, JavaScript lo mostrará con 'flex' */
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            width: 80%;
+            max-width: 700px;
+            position: relative;
+            animation-name: animatetop;
+            animation-duration: 0.4s;
+            display: flex;
+            gap: 25px;
+        }
+
+        @keyframes animatetop {
+            from {top: -300px; opacity: 0}
+            to {top: 0; opacity: 1}
+        }
+
+        .modal-close {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover,
+        .modal-close:focus {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .modal-image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-image-container img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 8px;
+        }
+
+        .modal-details {
+            flex: 2;
+        }
+
+        .modal-details h3 {
+            font-size: 2.2em;
+            color: #cc8b79;
+            margin-bottom: 10px;
+        }
+
+        .modal-details .modal-price {
+            font-size: 1.8em;
+            color: #555;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .modal-details p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* Estilos para la selección de color */
+        .color-selector {
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .color-selector label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .color-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .color-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%; /* Cuadrados o círculos */
+            border: 2px solid #ccc;
+            cursor: pointer;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            box-sizing: border-box; /* Incluye padding y border en el tamaño total */
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Clases para los colores específicos */
+        .color-box[data-color="rojo"] { background-color: #e74c3c; }
+        .color-box[data-color="morado"] { background-color: #9b59b6; }
+        .color-box[data-color="rosa"] { background-color: #ff9ff3; }
+        .color-box[data-color="blanco"] { background-color: #ffffff; border: 2px solid #999; } /* Blanco con borde para que se vea */
+        .color-box[data-color="negro"] { background-color: #333333; }
+        .color-box[data-color="azul"] { background-color: #3498db; }
+        .color-box[data-color="verde"] { background-color: #2ecc71; }
+        .color-box[data-color="amarillo"] { background-color: #f1c40f; }
+        .color-box[data-color="gris"] { background-color: #808080; }
+        .color-box[data-color="multicolor"] {
+            background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3); /* Rainbow */
+        }
+        .color-box[data-color="celeste"] { background-color: #87CEEB; }
+
+
+        .color-box.selected {
+            border-color: #cc8b79; /* Borde más pronunciado al seleccionar */
+            box-shadow: 0 0 0 3px rgba(204, 139, 121, 0.5); /* Sombra de selección */
+        }
+        /* Icono de check para el color seleccionado */
+        .color-box.selected::after {
+            content: '✔'; /* Unicode checkmark */
+            font-size: 20px;
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            /* Para colores claros, el checkmark debería ser oscuro */
+            color: var(--check-color, white); /* Usar variable CSS para el color del check */
+        }
+        .color-box[data-color="blanco"].selected::after,
+        .color-box[data-color="amarillo"].selected::after,
+        .color-box[data-color="rosa"].selected::after,
+        .color-box[data-color="celeste"].selected::after {
+            --check-color: #333; /* Color oscuro para el check en fondos claros */
+        }
+
+
+        .modal-details .boton {
+            width: auto;
+            padding: 12px 30px;
+            font-size: 1.2em;
+        }
+
+        /* --- Ajustes responsivos para pantallas más pequeñas (MÓVIL) --- */
+        @media (max-width: 768px) {
+            .contenido {
+                margin-right: 0;
+                padding-top: 10px; /* Reducir el padding top en móvil para el contenido principal */
+            }
+            .contenido.carrito-abierto {
+                margin-right: 0;
+            }
+            .carrito {
+                width: 100%;
+                right: -100%; /* Esconde el carrito completamente */
+            }
+            .carrito.abierto {
+                right: 0;
+            }
+
+            /* --- Navbar en móvil --- */
+            .navbar {
+                flex-direction: row; /* Mantener elementos en fila */
+                justify-content: space-between; /* Espaciar logo y botón */
+                align-items: center;
+                padding: 10px 20px;
+            }
+            .navbar .logo {
+                text-align: left;
+                flex-grow: 0; /* No crece tanto en móvil */
+            }
+            .menu-toggle {
+                display: block; /* Mostrar el botón de hamburguesa en móvil */
+            }
+            .nav-links {
+                display: none; /* Ocultar los enlaces por defecto */
+                flex-direction: column;
+                width: 100%;
+                background-color: #cc8b79; /* Mismo color de fondo */
+                position: absolute;
+                top: 60px; /* Debajo de la barra de navegación */
+                left: 0;
+                padding: 10px 0;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            .nav-links.active {
+                display: flex; /* Mostrar enlaces cuando la clase 'active' está presente */
+            }
+            .navbar .nav-links a {
+                margin: 10px 20px;
+                display: block; /* Cada enlace en su propia línea */
+                text-align: center;
+            }
+
+            /* Ajustes para el Hero Section */
+            .hero-section {
+                padding: 50px 15px; /* Menos padding en móvil */
+            }
+            .hero-section h1 {
+                font-size: 2em; /* Texto más pequeño */
+            }
+            .hero-section p {
+                font-size: 1.1em;
+            }
+
+            .productos-grid {
+                grid-template-columns: 1fr; /* Una columna en móviles */
+            }
+            .whatsapp-float {
+                right: 15px;
+                bottom: 15px;
+            }
+            .whatsapp-float span {
+                right: 15px;
+            }
+            #btnToggleCarrito {
+                right: 15px;
+                bottom: 80px; /* Mover el botón del carrito para que no choque con el de WhatsApp */
+            }
+            #mensajePersonalizadoContainer {
+                width: calc(100% - 40px); /* Ajuste para móviles */
+                right: 20px;
+                bottom: 80px;
+            }
+            .modal-content {
+                flex-direction: column; /* Columna en móviles para el modal */
+                width: 90%;
+                padding: 20px;
+                gap: 15px;
+            }
+            .modal-image-container img {
+                max-height: 200px;
+            }
+            .modal-details h3 {
+                font-size: 1.8em;
+            }
+            .modal-details .modal-price {
+                font-size: 1.5em;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <div class="contenido" id="contenidoPrincipal">
-    <header>
-      <h1>Rayén y Küruf</h1>
-      <p>🧶 Tienda de Lanas y Tejidos hechos con amor 🧵</p>
-    </header>
+    <nav class="navbar">
+        <div class="logo">Rayén y Küruf</div>
+        <button class="menu-toggle" id="menuToggle">&#9776;</button>
+        <div class="nav-links" id="navLinks">
+            <a href="#inicio">Inicio</a>
+            <a href="#lanas">Lanas</a>
+            <a href="#gorros">Gorros</a>
+            <a href="#chalecos">Chalecos</a>
+            <a href="#cuellos">Cuellos</a>
+            <a href="#bufandas">Bufandas</a>
+        </div>
+    </nav>
 
-    <!-- Lanas -->
-    <div class="seccion" id="lanas">
-      <h2>🧶 Lanas</h2>
-      <div class="producto">
-        <img src="https://via.placeholder.com/200x150?text=Lana+Roja" alt="Lana Roja" />
-        <h3>Lana Roja</h3>
-        <p>$3.500</p>
-        <button class="boton" onclick="agregarAlCarrito('Lana Roja')">Agregar al carrito</button>
-      </div>
-      <div class="producto">
-        <img src="https://via.placeholder.com/200x150?text=Lana+Multicolor" alt="Lana Multicolor" />
-        <h3>Lana Multicolor</h3>
-        <p>$4.200</p>
-        <button class="boton" onclick="agregarAlCarrito('Lana Multicolor')">Agregar al carrito</button>
-      </div>
+    <div class="contenido" id="contenidoPrincipal">
+        <header id="inicio">
+            <h1>Rayén y Küruf</h1>
+            <p>🧶 Tienda de Lanas y Tejidos hechos con amor 🧵</p>
+        </header>
+
+        <div class="hero-section">
+            <h1>Bienvenida/o a Rayén y Küruf</h1>
+            <p>Tejidos con el Corazón del Sur</p>
+        </div>
+
+        <div class="seccion" id="lanas">
+            <h2>🧶 Lanas</h2>
+            <div class="productos-grid">
+                <div class="producto">
+                    <img src="lanaroja.png" alt="Lana Roja" />
+                    <h3>Lana Roja</h3>
+                    <p>$3.500</p>
+                    <button class="boton" onclick="mostrarDetalles('Lana Roja')">Ver Detalles</button>
+                </div>
+
+                <div class="producto">
+                    <img src="http://googleusercontent.com/image_generation_content/15" alt="Lana Celeste" />
+                    <h3>Lana Celeste</h3>
+                    <p>$3.800</p>
+                    <button class="boton" onclick="mostrarDetalles('Lana Celeste')">Ver Detalles</button>
+                </div>
+
+                <div class="producto">
+                    <img src="http://googleusercontent.com/image_generation_content/15" alt="Lana Morada" />
+                    <h3>Lana Morada</h3>
+                    <p>$4.000</p>
+                    <button class="boton" onclick="mostrarDetalles('Lana Morada')">Ver Detalles</button>
+                </div>
+
+                <div class="producto">
+                     <img src="http://googleusercontent.com/image_generation_content/15" alt="Lana Multicolor" />
+                    <h3>Lana Multicolor</h3>
+                    <p>$4.200</p>
+                    <button class="boton" onclick="mostrarDetalles('Lana Multicolor')">Ver Detalles</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="seccion" id="gorros">
+            <h2>🧢 Gorros</h2>
+            <div class="productos-grid">
+                <div class="producto">
+                    <img src="gorrorojo.png" alt="Gorro tejido" />
+                    <h3>Gorro tejido</h3>
+                    <p>$5.000</p>
+                    <button class="boton" onclick="mostrarDetalles('Gorro tejido')">Ver Detalles</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="seccion" id="chalecos">
+            <h2>🧥 Chalecos</h2>
+            <div class="productos-grid">
+                <div class="producto">
+                    <img src="http://googleusercontent.com/image_generation_content/17" alt="Chaleco sin mangas" />
+                    <h3>Chaleco sin mangas</h3>
+                    <p>$8.000</p>
+                    <button class="boton" onclick="mostrarDetalles('Chaleco sin mangas')">Ver Detalles</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="seccion" id="cuellos">
+            <h2>🧣 Cuellos</h2>
+            <div class="productos-grid">
+                <div class="producto">
+                    <img src="http://googleusercontent.com/image_generation_content/18" alt="Cuello tejido" />
+                    <h3>Cuello tejido</h3>
+                    <p>$6.500</p>
+                    <button class="boton" onclick="mostrarDetalles('Cuello tejido')">Ver Detalles</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="seccion" id="bufandas">
+            <h2>🧣 Bufandas</h2>
+            <div class="productos-grid">
+                <div class="producto">
+                    <img src="http://googleusercontent.com/image_generation_content/16" alt="Bufanda tejida" />
+                    <h3>Bufanda tejida</h3>
+                    <p>$6.000</p>
+                    <button class="boton" onclick="mostrarDetalles('Bufanda tejida')">Ver Detalles</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Contacto: <a href="mailto:rcespinozahumada@gmail.com style="color:white;">rcespinozahumada@gmail.com</a></p>
+            <p>&copy; 2025 Rayén y Küruf. Todos los derechos reservados.</p>
+        </footer>
     </div>
 
-    <!-- Gorros -->
-    <div class="seccion" id="gorros">
-      <h2>🧢 Gorros</h2>
-      <div class="producto">
-        <img src="https://via.placeholder.com/200x150?text=Gorro+Tejido" alt="Gorro tejido" />
-        <h3>Gorro tejido</h3>
-        <p>$5.000</p>
-        <button class="boton" onclick="agregarAlCarrito('Gorro tejido')">Agregar al carrito</button>
-      </div>
+    <div class="carrito" id="carritoSidebar">
+        <h2>🛒 Carrito</h2>
+        <div id="carrito-items">
+            <p class="carrito-vacio">Tu carrito está vacío.</p>
+        </div>
+        <div class="total-carrito" id="totalCarrito">
+            Total: $0
+        </div>
+
+        <button class="boton-seguir" id="btnSeguirComprando">Seguir comprando</button>
+
+        <div style="margin-top: 20px;">
+            <button onclick="enviarPorWhatsApp()" style="background:#25d366; color:#fff; border:none; padding:12px; border-radius:6px; width:100%; cursor:pointer; font-weight:bold; font-size:16px; transition: background-color 0.3s ease;">
+                Enviar pedido por WhatsApp
+            </button>
+        </div>
     </div>
 
-    <!-- Chalecos -->
-    <div class="seccion" id="chalecos">
-      <h2>🧥 Chalecos</h2>
-      <div class="producto">
-        <img src="https://via.placeholder.com/200x150?text=Chaleco+sin+Mangas" alt="Chaleco sin mangas" />
-        <h3>Chaleco sin mangas</h3>
-        <p>$8.000</p>
-        <button class="boton" onclick="agregarAlCarrito('Chaleco sin mangas')">Agregar al carrito</button>
-      </div>
+    <div class="whatsapp-float" id="btnWhatsappPersonalizado" title="¿Te interesa algo personalizado o tienes una duda?">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+        <span>¿Te interesa algo personalizado o tienes una duda?</span>
     </div>
 
-    <!-- Cuellos -->
-    <div class="seccion" id="cuellos">
-      <h2>🧣 Cuellos</h2>
-      <div class="producto">
-        <img src="https://via.placeholder.com/200x150?text=Cuello+Tejido" alt="Cuello tejido" />
-        <h3>Cuello tejido</h3>
-        <p>$6.500</p>
-        <button class="boton" onclick="agregarAlCarrito('Cuello tejido')">Agregar al carrito</button>
-      </div>
+    <div id="mensajePersonalizadoContainer">
+        <textarea id="mensajePersonalizado" placeholder="Escribe tu mensaje aquí..."></textarea>
+        <button onclick="enviarMensajePersonalizado()">Enviar</button>
     </div>
 
-    <!-- Bufandas -->
-    <div class="seccion" id="bufandas">
-      <h2>🧣 Bufandas</h2>
-      <div class="producto">
-        <img src="https://via.placeholder.com/200x150?text=Bufanda+Tejida" alt="Bufanda tejida" />
-        <h3>Bufanda tejida</h3>
-        <p>$6.000</p>
-        <button class="boton" onclick="agregarAlCarrito('Bufanda tejida')">Agregar al carrito</button>
-      </div>
+    <div id="overlayPersonalizado"></div>
+
+    <button id="btnToggleCarrito" title="Abrir/Cerrar carrito">🛒</button>
+
+    <div id="productDetailsModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="cerrarDetalles()">&times;</span>
+            <div class="modal-image-container">
+                <img id="modalProductImage" src="" alt="Imagen del Producto">
+            </div>
+            <div class="modal-details">
+                <h3 id="modalProductName"></h3>
+                <p class="modal-price" id="modalProductPrice"></p>
+                <p id="modalProductDescription"></p>
+
+                <div class="color-selector" id="colorSelectorContainer" style="display: none;">
+                    <label>Selecciona un color:</label>
+                    <div class="color-options" id="colorOptions">
+                        </div>
+                </div>
+
+                <button class="boton" id="modalAddToCartButton">Agregar al carrito</button>
+            </div>
+        </div>
     </div>
 
-    <footer>
-      <p>Contacto: <a href="mailto:rcespinozahumada@gmail.com" style="color:white;">rcespinozahumada@gmail.com</a></p>
-      <p>&copy; 2025 Rayén y Küruf. Todos los derechos reservados.</p>
-    </footer>
-  </div>
+    <script>
+        // Objeto para almacenar los productos en el carrito
+        // La clave del carrito ahora será "Nombre del Producto - Color (si aplica)"
+        const carrito = {};
 
-  <!-- Carrito lateral -->
-  <div class="carrito" id="carritoSidebar">
-    <h2>🛒 Carrito</h2>
-    <div id="carrito-items">
-      <p>Tu carrito está vacío.</p>
-    </div>
+        // Base de datos de productos con sus precios, imágenes y descripciones
+        const productosData = {
+            "Lana Roja": { precio: 3500, img: "lanaroja.png", desc: "Lana 100% acrílica, ideal para todo tipo de proyectos de tejido. Suave al tacto y fácil de trabajar." },
+            "Lana Celeste": { precio: 3800, img: "http://googleusercontent.com/image_generation_content/15", desc: "Lana premium en un hermoso tono celeste, perfecta para prendas de bebé o proyectos delicados. Hipoalergénica." },
+            "Lana Morada": { precio: 4000, img: "http://googleusercontent.com/image_generation_content/15", desc: "Lana vibrante color morado, ideal para dar un toque de alegría a tus creaciones. Resistente y duradera." },
+            "Lana Multicolor": { precio: 4200, img: "http://googleusercontent.com/image_generation_content/15", desc: "Lana con patrones de color únicos que cambian al tejer. Crea piezas originales sin esfuerzo. 100gr." },
+            "Gorro tejido": {
+                precio: 5000,
+                img: "http://googleusercontent.com/image_generation_content/19", // Imagen genérica de respaldo si no hay un color predeterminado
+                desc: "Gorro suave y cálido, tejido a mano con lana de oveja patagónica. Ideal para el frío invierno. Talla única.",
+                colores: [
+                    { name: "rojo", file: "gorrorojo.png" },
+                    { name: "multicolor", file: "gorromulticolor.png" },
+                    { name: "morado", file: "gorromorado.png" },
+                   { name: "celeste", file: "gorroceleste.png" } // Puedes poner una imagen genérica para gorro celeste aquí si tienes una // Puedes poner una imagen genérica para gorro celeste aquí si tienes una
+                ]
+            },
+            "Chaleco sin mangas": {
+                precio: 8000,
+                img: "http://googleusercontent.com/image_generation_content/17",
+                desc: "Chaleco sin mangas, ligero y versátil, perfecto para cualquier estación. Disponible en varias tallas y colores.",
+                colores: ["blanco", "negro", "azul", "verde", "amarillo"].map(c => ({name: c, file: `http://googleusercontent.com/image_generation_content/17`})) // Ejemplo: adaptar si tuvieras imágenes específicas
+            },
+            "Cuello tejido": {
+                precio: 6500,
+                img: "http://googleusercontent.com/image_generation_content/18",
+                desc: "Cuello cerrado de lana, muy abrigador y suave. Protege del viento y el frío con estilo. Talla única.",
+                colores: ["rojo", "negro", "blanco", "morado"].map(c => ({name: c, file: `http://googleusercontent.com/image_generation_content/18`})) // Ejemplo
+            },
+            "Bufanda tejida": {
+                precio: 6000,
+                img: "http://googleusercontent.com/image_generation_content/16",
+                desc: "Bufanda larga y ancha, tejida a mano con patrones únicos. Complemento ideal para cualquier atuendo invernal.",
+                colores: ["negro", "gris", "rojo", "azul"].map(c => ({name: c, file: `http://googleusercontent.com/image_generation_content/16`})) // Ejemplo
+            }
+        };
 
-    <button class="boton-seguir" id="btnSeguirComprando">Seguir comprando</button>
+        // Variable para almacenar el color seleccionado en el modal
+        let selectedColor = null;
 
-    <div style="margin-top: 20px;">
-      <button onclick="enviarPorWhatsApp()" style="background:#25d366; color:#fff; border:none; padding:10px; border-radius:6px; width:100%; cursor:pointer; font-weight:bold; font-size:16px;">
-        Enviar pedido por WhatsApp
-      </button>
-    </div>
-  </div>
+        // Función para formatear el monto a moneda chilena
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', minimumFractionDigits: 0 }).format(amount);
+        }
 
-  <!-- Botón flotante WhatsApp para mensaje personalizado -->
-  <div class="whatsapp-float" id="btnWhatsappPersonalizado" title="¿Te interesa algo personalizado o tienes una duda?">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
-    <span>¿Te interesa algo personalizado o tienes una duda?</span>
-  </div>
+        // Función para actualizar la visualización del carrito
+        function actualizarCarrito() {
+            const contenedor = document.getElementById("carrito-items");
+            contenedor.innerHTML = ""; // Limpiar el contenido actual del carrito
+            let total = 0; // Inicializar el total del carrito
 
-  <!-- Caja para escribir mensaje personalizado -->
-  <div id="mensajePersonalizadoContainer">
-    <textarea id="mensajePersonalizado" placeholder="Escribe tu mensaje aquí..."></textarea>
-    <button onclick="enviarMensajePersonalizado()">Enviar</button>
-  </div>
+            const productosEnCarrito = Object.keys(carrito);
+            if (productosEnCarrito.length === 0) {
+                // Mostrar mensaje de carrito vacío si no hay productos
+                contenedor.innerHTML = "<p class='carrito-vacio'>Tu carrito está vacío.</p>";
+                document.getElementById('totalCarrito').textContent = "Total: " + formatCurrency(0);
+                return;
+            }
 
-  <!-- Overlay para cerrar con clic afuera -->
-  <div id="overlayPersonalizado"></div>
+            productosEnCarrito.forEach(key => { // `key` ahora puede ser "Nombre del Producto - Color (si aplica)"
+                const cantidad = carrito[key];
+                // Separar el nombre del producto y el color si existe
+                const parts = key.split(' - ');
+                const nombreProductoBase = parts[0];
+                const colorSeleccionado = parts[1] || ''; // Si no hay color, es cadena vacía
 
-  <!-- Botón fijo para abrir/cerrar carrito -->
-  <button id="btnToggleCarrito" title="Abrir/Cerrar carrito">🛒</button>
+                const precioUnitario = productosData[nombreProductoBase] ? productosData[nombreProductoBase].precio : 0;
+                const subtotalItem = cantidad * precioUnitario;
+                total += subtotalItem;
 
-  <script>
-    const carrito = {};
+                const displayName = colorSeleccionado ? `${nombreProductoBase} (${colorSeleccionado})` : nombreProductoBase;
 
-    function actualizarCarrito() {
-      const contenedor = document.getElementById("carrito-items");
-      contenedor.innerHTML = "";
+                const div = document.createElement("div");
+                div.className = "item-carrito";
+                div.innerHTML = `
+                    <strong>${displayName}</strong><br>
+                    <span>Cantidad: ${cantidad}</span><br>
+                    <span>Precio unitario: ${formatCurrency(precioUnitario)}</span><br>
+                    <span>Subtotal: ${formatCurrency(subtotalItem)}</span>
+                    <div class="acciones">
+                        <button onclick="incrementar('${key}')">+</button>
+                        <button onclick="decrementar('${key}')">-</button>
+                        <button class="eliminar" onclick="eliminar('${key}')">Eliminar</button>
+                    </div>
+                `;
+                contenedor.appendChild(div);
+            });
+            // Actualizar el total visible en el carrito
+            document.getElementById('totalCarrito').textContent = "Total: " + formatCurrency(total);
+        }
 
-      const productos = Object.keys(carrito);
-      if (productos.length === 0) {
-        contenedor.innerHTML = "<p>Tu carrito está vacío.</p>";
-        return;
-      }
+        // Función para agregar un producto (con o sin color) al carrito
+        function agregarAlCarrito(productName, color = null) {
+            let key = productName;
+            if (color) {
+                key = `${productName} - ${color}`;
+            }
 
-      productos.forEach(nombre => {
-        const cantidad = carrito[nombre];
-        const div = document.createElement("div");
-        div.className = "item-carrito";
-        div.innerHTML = `
-          <strong>${nombre}</strong><br>
-          Cantidad: ${cantidad}
-          <br>
-          <button onclick="incrementar('${nombre}')">+</button>
-          <button onclick="decrementar('${nombre}')">-</button>
-          <button onclick="eliminar('${nombre}')">Eliminar</button>
-        `;
-        contenedor.appendChild(div);
-      });
-    }
+            if (carrito[key]) {
+                carrito[key]++;
+            } else {
+                carrito[key] = 1;
+            }
+            actualizarCarrito();
+            abrirCarrito();
+            alert(`"${key}" añadido al carrito.`);
+        }
 
-    function agregarAlCarrito(nombre) {
-      if (carrito[nombre]) {
-        carrito[nombre]++;
-      } else {
-        carrito[nombre] = 1;
-      }
-      actualizarCarrito();
-      abrirCarrito(); // Abrir carrito al agregar
-    }
+        // Función para incrementar la cantidad de un producto en el carrito (usa la clave completa)
+        function incrementar(key) {
+            carrito[key]++;
+            actualizarCarrito();
+        }
 
-    function incrementar(nombre) {
-      carrito[nombre]++;
-      actualizarCarrito();
-    }
+        // Función para decrementar la cantidad de un producto en el carrito (usa la clave completa)
+        function decrementar(key) {
+            if (carrito[key] > 1) {
+                carrito[key]--;
+            } else {
+                eliminar(key);
+            }
+            actualizarCarrito();
+        }
 
-    function decrementar(nombre) {
-      if (carrito[nombre] > 1) {
-        carrito[nombre]--;
-      } else {
-        eliminar(nombre);
-      }
-      actualizarCarrito();
-    }
+        // Función para eliminar un producto del carrito (usa la clave completa)
+        function eliminar(key) {
+            delete carrito[key];
+            actualizarCarrito();
+        }
 
-    function eliminar(nombre) {
-      delete carrito[nombre];
-      actualizarCarrito();
-    }
+        // Función para enviar el pedido por WhatsApp
+        function enviarPorWhatsApp() {
+            const productos = Object.entries(carrito);
+            if (productos.length === 0) {
+                alert("Tu carrito está vacío. ¡Agrega algunos productos antes de enviar un pedido!");
+                return;
+            }
 
-    function enviarPorWhatsApp() {
-      const productos = Object.entries(carrito);
-      if (productos.length === 0) {
-        alert("Tu carrito está vacío.");
-        return;
-      }
+            let mensaje = "Hola Rayén y Küruf, me gustaría realizar el siguiente pedido:\n\n";
+            let totalPedido = 0;
 
-      let mensaje = "Hola, quiero pedir:\n";
-      productos.forEach(([nombre, cantidad]) => {
-        mensaje += `- ${cantidad} x ${nombre}\n`;
-      });
+            productos.forEach(([key, cantidad]) => { // `key` es "Nombre - Color"
+                const parts = key.split(' - ');
+                const nombreProductoBase = parts[0];
+                const colorSeleccionado = parts[1] || '';
 
-      const numero = "56988612195"; // Número sin +
-      const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
-      window.open(url, "_blank");
-    }
+                const precioUnitario = productosData[nombreProductoBase] ? productosData[nombreProductoBase].precio : 0;
+                const subtotalItem = cantidad * precioUnitario;
+                totalPedido += subtotalItem;
 
-    // Funcionalidad para el mensaje personalizado
-    const btnWhatsapp = document.getElementById('btnWhatsappPersonalizado');
-    const mensajeContainer = document.getElementById('mensajePersonalizadoContainer');
-    const overlay = document.getElementById('overlayPersonalizado');
+                const displayName = colorSeleccionado ? `${nombreProductoBase} (${colorSeleccionado})` : nombreProductoBase;
+                mensaje += `- ${cantidad} x ${displayName} (${formatCurrency(precioUnitario)} c/u) = ${formatCurrency(subtotalItem)}\n`;
+            });
 
-    btnWhatsapp.addEventListener('click', () => {
-      if (mensajeContainer.style.display === 'block') {
-        mensajeContainer.style.display = 'none';
-        overlay.style.display = 'none';
-      } else {
-        mensajeContainer.style.display = 'block';
-        overlay.style.display = 'block';
-        document.getElementById('mensajePersonalizado').focus();
-      }
-    });
+            mensaje += `\nTotal del pedido: ${formatCurrency(totalPedido)}\n`;
+            mensaje += "\nPor favor, confirmame la disponibilidad y el método de pago. ¡Gracias!";
 
-    overlay.addEventListener('click', () => {
-      mensajeContainer.style.display = 'none';
-      overlay.style.display = 'none';
-    });
+            const numero = "56988612195"; // Número de WhatsApp sin el '+'
+            const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+            window.open(url, "_blank");
+        }
 
-    function enviarMensajePersonalizado() {
-      const texto = document.getElementById('mensajePersonalizado').value.trim();
-      if (!texto) {
-        alert("Por favor, escribe un mensaje antes de enviar.");
-        return;
-      }
-      const numero = "56988612195"; // Número sin +
-      const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
-      window.open(url, "_blank");
-      document.getElementById('mensajePersonalizado').value = '';
-      mensajeContainer.style.display = 'none';
-      overlay.style.display = 'none';
-    }
+        // --- Funcionalidad para el mensaje personalizado de WhatsApp ---
+        const btnWhatsapp = document.getElementById('btnWhatsappPersonalizado');
+        const mensajeContainer = document.getElementById('mensajePersonalizadoContainer');
+        const overlay = document.getElementById('overlayPersonalizado');
 
-    // Funciones para abrir/cerrar carrito
-    const btnToggleCarrito = document.getElementById('btnToggleCarrito');
-    const carritoSidebar = document.getElementById('carritoSidebar');
-    const contenidoPrincipal = document.getElementById('contenidoPrincipal');
-    const btnSeguirComprando = document.getElementById('btnSeguirComprando');
+        function cerrarWhatsappFlotante() {
+            mensajeContainer.style.display = 'none';
+            overlay.style.display = 'none';
+        }
 
-    btnToggleCarrito.addEventListener('click', () => {
-      if (carritoSidebar.classList.contains('abierto')) {
-        cerrarCarrito();
-      } else {
-        abrirCarrito();
-      }
-    });
+        btnWhatsapp.addEventListener('click', () => {
+            cerrarCarrito();
+            cerrarDetalles();
+            cerrarMenuNavegacion();
 
-    btnSeguirComprando.addEventListener('click', () => {
-      cerrarCarrito();
-    });
+            if (mensajeContainer.style.display === 'block') {
+                cerrarWhatsappFlotante();
+            } else {
+                mensajeContainer.style.display = 'block';
+                overlay.style.display = 'block';
+                document.getElementById('mensajePersonalizado').focus();
+            }
+        });
 
-    function abrirCarrito() {
-      carritoSidebar.classList.add('abierto');
-      contenidoPrincipal.classList.add('carrito-abierto');
-    }
+        overlay.addEventListener('click', () => {
+            cerrarWhatsappFlotante();
+        });
 
-    function cerrarCarrito() {
-      carritoSidebar.classList.remove('abierto');
-      contenidoPrincipal.classList.remove('carrito-abierto');
-    }
+        function enviarMensajePersonalizado() {
+            const texto = document.getElementById('mensajePersonalizado').value.trim();
+            if (!texto) {
+                alert("Por favor, escribe un mensaje antes de enviar.");
+                return;
+            }
+            const numero = "56988612195"; // Número de WhatsApp sin el '+'
+            const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
+            window.open(url, "_blank");
+            document.getElementById('mensajePersonalizado').value = '';
+            cerrarWhatsappFlotante();
+        }
 
-    // Inicializa carrito vacío
-    actualizarCarrito();
-  </script>
+        // --- Funciones para abrir/cerrar el carrito lateral ---
+        const btnToggleCarrito = document.getElementById('btnToggleCarrito');
+        const carritoSidebar = document.getElementById('carritoSidebar');
+        const contenidoPrincipal = document.getElementById('contenidoPrincipal');
+        const btnSeguirComprando = document.getElementById('btnSeguirComprando');
+
+        btnToggleCarrito.addEventListener('click', () => {
+            cerrarWhatsappFlotante();
+            cerrarDetalles();
+            cerrarMenuNavegacion();
+
+            if (carritoSidebar.classList.contains('abierto')) {
+                cerrarCarrito();
+            } else {
+                abrirCarrito();
+            }
+        });
+
+        btnSeguirComprando.addEventListener('click', () => {
+            cerrarCarrito();
+        });
+
+        function abrirCarrito() {
+            carritoSidebar.classList.add('abierto');
+            contenidoPrincipal.classList.add('carrito-abierto');
+        }
+
+        function cerrarCarrito() {
+            carritoSidebar.classList.remove('abierto');
+            contenidoPrincipal.classList.remove('carrito-abierto');
+        }
+
+        // --- Funcionalidad del Modal de Detalles del Producto ---
+        const productDetailsModal = document.getElementById('productDetailsModal');
+        const modalProductName = document.getElementById('modalProductName');
+        const modalProductPrice = document.getElementById('modalProductPrice');
+        const modalProductDescription = document.getElementById('modalProductDescription');
+        const modalProductImage = document.getElementById('modalProductImage');
+        const modalAddToCartButton = document.getElementById('modalAddToCartButton');
+        const colorSelectorContainer = document.getElementById('colorSelectorContainer');
+        const colorOptionsDiv = document.getElementById('colorOptions');
+
+        let currentProductForModal = null; // Variable para saber qué producto se está viendo en el modal
+
+        function mostrarDetalles(productName) {
+            cerrarCarrito();
+            cerrarWhatsappFlotante();
+            cerrarMenuNavegacion();
+
+            const product = productosData[productName];
+            if (!product) return;
+
+            modalProductName.textContent = productName;
+            modalProductPrice.textContent = formatCurrency(product.precio);
+            modalProductDescription.textContent = product.desc;
+
+            // Lógica para establecer la imagen inicial del modal
+            if (productName === 'Lana Roja') {
+                modalProductImage.src = 'lanaroja.png';
+            } else if (productName === 'Gorro tejido') {
+                // Si el gorro tiene colores definidos, intenta usar el archivo del primer color
+                if (product.colores && product.colores.length > 0 && product.colores[0].file) {
+                    modalProductImage.src = product.colores[0].file;
+                } else {
+                    modalProductImage.src = product.img; // Usa la imagen genérica del producto si no hay colores específicos
+                }
+            } else {
+                modalProductImage.src = product.img; // Para los demás productos, usa la imagen de los datos
+            }
+
+
+            currentProductForModal = productName;
+            selectedColor = null; // Reiniciar el color seleccionado cada vez que se abre un modal
+
+            // --- Lógica para mostrar/ocultar y generar selectores de color ---
+            if (product.colores && product.colores.length > 0) {
+                colorSelectorContainer.style.display = 'block'; // Mostrar el contenedor de colores
+                colorOptionsDiv.innerHTML = ''; // Limpiar opciones anteriores
+
+                product.colores.forEach(colorObj => { // Iterar sobre los objetos de color
+                    const colorBox = document.createElement('div');
+                    colorBox.className = 'color-box';
+                    colorBox.dataset.color = colorObj.name; // Usar el nombre del color
+                    colorBox.title = colorObj.name.charAt(0).toUpperCase() + colorObj.name.slice(1);
+
+                    // Establecer el color de fondo del cuadro de color
+                    // Esto asume que tienes reglas CSS para cada color-box[data-color="x"]
+                    // o que quieres que el JS lo ponga. Para colores complejos como multicolor, CSS es mejor.
+                    // Si no, podrías hacer: colorBox.style.backgroundColor = colorObj.name;
+                    // O definir un mapeo de nombres de colores a códigos HEX si no es un nombre directo de CSS.
+
+                    colorBox.addEventListener('click', () => {
+                        document.querySelectorAll('.color-box').forEach(box => {
+                            box.classList.remove('selected');
+                        });
+                        colorBox.classList.add('selected');
+                        selectedColor = colorObj.name; // Almacenar solo el nombre del color
+                        // ¡Actualizar la imagen del modal cuando se selecciona un color!
+                        if (colorObj.file) { // Si el objeto color tiene una ruta de archivo específica
+                             modalProductImage.src = colorObj.file;
+                        } else {
+                             modalProductImage.src = product.img; // Fallback si no hay imagen específica para ese color
+                        }
+                    });
+                    colorOptionsDiv.appendChild(colorBox);
+                });
+            } else {
+                colorSelectorContainer.style.display = 'none'; // Ocultar si no hay colores
+            }
+
+            // Asignar el evento al botón "Agregar al carrito" dentro del modal
+            modalAddToCartButton.onclick = () => {
+                // Verificar si es un producto con colores y si se ha seleccionado uno
+                if (product.colores && product.colores.length > 0 && !selectedColor) {
+                    alert('Por favor, selecciona un color antes de agregar al carrito.');
+                    return;
+                }
+                agregarAlCarrito(currentProductForModal, selectedColor);
+                cerrarDetalles(); // Cierra el modal después de agregar al carrito
+            };
+
+            productDetailsModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function cerrarDetalles() {
+            productDetailsModal.style.display = 'none';
+            document.body.style.overflow = ''; // Restaura el scroll del cuerpo
+            currentProductForModal = null; // Reiniciar la variable
+            selectedColor = null; // Reiniciar el color seleccionado
+            // Limpiar selección visual al cerrar el modal
+            document.querySelectorAll('.color-box').forEach(box => {
+                box.classList.remove('selected');
+            });
+        }
+
+        // Cierra el modal si se hace clic fuera del contenido del modal
+        window.onclick = function(event) {
+            if (event.target == productDetailsModal) {
+                cerrarDetalles();
+            }
+        }
+
+        // --- Lógica para el menú de hamburguesa en móvil ---
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        function cerrarMenuNavegacion() {
+            navLinks.classList.remove('active');
+        }
+
+        menuToggle.addEventListener('click', () => {
+            cerrarCarrito();
+            cerrarWhatsappFlotante();
+            cerrarDetalles();
+
+            navLinks.classList.toggle('active');
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                cerrarMenuNavegacion();
+            });
+        });
+
+        // Inicializa el carrito vacío al cargar la página
+        actualizarCarrito();
+    </script>
 
 </body>
 </html>
