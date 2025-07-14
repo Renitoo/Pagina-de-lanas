@@ -5,37 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Rayén y Küruf - Tienda de Lanas y Tejidos</title>
     <style>
-        /* Estilos generales */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fuente más moderna */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #fdf6f0;
             margin: 0;
             padding: 0;
             display: flex;
             min-height: 100vh;
             overflow-x: hidden;
-            flex-direction: column; /* Para que el footer se quede abajo */
+            flex-direction: column;
         }
 
-        /* --- Estilos para la barra de navegación fija --- */
         .navbar {
             background-color: #cc8b79;
             color: white;
             padding: 10px 20px;
             position: sticky;
             top: 0;
-            z-index: 1050; /* Mayor que el carrito y el whatsapp */
+            z-index: 1050;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap; /* Permite que los elementos se envuelvan si no caben */
+            flex-wrap: wrap;
         }
 
         .navbar .logo {
             font-size: 1.8em;
             font-weight: bold;
-            flex-grow: 1; /* Permite que el logo ocupe el espacio disponible */
+            flex-grow: 1;
         }
 
         .navbar a {
@@ -47,37 +45,34 @@
         }
 
         .navbar a:hover {
-            color: #ffead0; /* Un tono más claro al pasar el ratón */
+            color: #ffead0;
         }
 
-        /* --- Estilos para el botón de hamburguesa (solo en móvil) --- */
         .menu-toggle {
-            display: none; /* Oculto por defecto en desktop */
+            display: none;
             font-size: 2em;
             background: none;
             border: none;
             color: white;
             cursor: pointer;
             padding: 5px 10px;
-            z-index: 1060; /* Asegurarse de que esté encima de todo */
+            z-index: 1060;
         }
 
-        /* --- Estilos para los enlaces de navegación --- */
         .nav-links {
-            display: flex; /* Por defecto en desktop, los enlaces se muestran en línea */
+            display: flex;
             align-items: center;
         }
 
-        /* Contenido principal de la página */
         .contenido {
             flex: 1;
             padding: 20px;
-            margin-right: 320px; /* Espacio para carrito cerrado, ajusta si cambias carrito */
+            margin-right: 320px;
             transition: margin-right 0.3s ease;
-            max-width: 1200px; /* Ancho máximo para el contenido principal */
+            max-width: 1200px;
             margin-left: auto;
             margin-right: auto;
-            padding-top: 70px; /* Espacio para la barra de navegación fija */
+            padding-top: 70px;
         }
 
         .contenido.carrito-abierto {
@@ -90,13 +85,12 @@
             text-align: center;
             padding: 20px;
             margin-bottom: 20px;
-            border-radius: 8px; /* Bordes redondeados */
+            border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
-        /* --- Estilos para la sección Hero --- */
         .hero-section {
-            background-image: url('https://via.placeholder.com/1200x300?text=Tejidos+con+el+Corazón+del+Sur'); /* Imagen de fondo atractiva */
+            background-image: url('https://via.placeholder.com/1200x300?text=Tejidos+con+el+Corazón+del+Sur');
             background-size: cover;
             background-position: center;
             color: white;
@@ -116,14 +110,14 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(0, 0, 0, 0.3); /* Overlay oscuro para legibilidad del texto */
+            background-color: rgba(0, 0, 0, 0.3);
             z-index: 1;
         }
 
         .hero-section h1, .hero-section p {
             position: relative;
             z-index: 2;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Sombra para el texto */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
         .hero-section h1 {
@@ -135,7 +129,6 @@
             font-size: 1.5em;
         }
 
-        /* Secciones de productos */
         .seccion {
             margin-bottom: 40px;
         }
@@ -148,36 +141,35 @@
             font-size: 2em;
         }
 
-        /* --- Mejoras en los productos (tarjetas individuales) --- */
         .productos-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
-            gap: 30px; /* Espacio entre productos */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
             justify-content: center;
         }
 
         .producto {
             text-align: center;
             background-color: white;
-            border: 1px solid #e0e0e0; /* Borde más suave */
-            border-radius: 12px; /* Bordes más redondeados */
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* Sombra más pronunciada */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
-            display: flex; /* Para mejor alineación del contenido */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
             flex-direction: column;
-            justify-content: space-between; /* Espacia el contenido */
+            justify-content: space-between;
         }
 
         .producto:hover {
-            transform: translateY(-5px); /* Pequeño levantamiento al pasar el ratón */
+            transform: translateY(-5px);
             box-shadow: 0 6px 15px rgba(0,0,0,0.15);
         }
 
         .producto img {
             max-width: 100%;
-            height: 200px; /* Altura fija para las imágenes */
-            object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+            height: 200px;
+            object-fit: cover;
             border-radius: 8px;
             margin-bottom: 15px;
         }
@@ -198,10 +190,10 @@
         .boton {
             background-color: #cc8b79;
             color: white;
-            padding: 12px 20px; /* Más padding */
+            padding: 12px 20px;
             border: none;
             border-radius: 8px;
-            margin-top: auto; /* Empuja el botón hacia abajo */
+            margin-top: auto;
             cursor: pointer;
             font-size: 1.1em;
             font-weight: bold;
@@ -212,14 +204,13 @@
             background-color: #a56349;
         }
 
-        /* Footer */
         footer {
             background-color: #cc8b79;
             color: white;
             text-align: center;
             padding: 20px;
             margin-top: 40px;
-            flex-shrink: 0; /* Evita que el footer se encoja */
+            flex-shrink: 0;
         }
 
         footer a {
@@ -227,7 +218,6 @@
             text-decoration: underline;
         }
 
-        /* Carrito sidebar */
         .carrito {
             position: fixed;
             top: 0;
@@ -253,7 +243,7 @@
         }
 
         .item-carrito {
-            border-bottom: 1px dashed #ccc; /* Línea más suave */
+            border-bottom: 1px dashed #ccc;
             padding: 10px 0;
             display: flex;
             flex-direction: column;
@@ -283,7 +273,7 @@
         }
 
         .item-carrito button.eliminar {
-            background-color: #e74c3c; /* Botón eliminar en rojo */
+            background-color: #e74c3c;
         }
 
         .item-carrito button:hover {
@@ -324,7 +314,6 @@
             background-color: #a56349;
         }
 
-        /* Botón fijo de carrito */
         #btnToggleCarrito {
             position: fixed;
             bottom: 20px;
@@ -349,7 +338,6 @@
             background-color: #a56349;
         }
 
-        /* Botón flotante WhatsApp */
         .whatsapp-float {
             position: fixed;
             bottom: 20px;
@@ -377,8 +365,8 @@
 
         .whatsapp-float span {
             position: absolute;
-            bottom: 70px; /* Ajustado para que el tooltip esté más cerca */
-            right: 80px;
+            bottom: 70px;
+            right: 0;
             background-color: #333;
             color: #fff;
             padding: 8px 12px;
@@ -390,7 +378,7 @@
             transition: opacity 0.3s;
             max-width: 200px;
             text-align: center;
-            transform: translateX(50%); /* Centrar tooltip horizontalmente */
+            transform: translateX(0);
         }
 
         .whatsapp-float:hover span {
@@ -398,7 +386,6 @@
             pointer-events: auto;
         }
 
-        /* Caja para mensaje personalizado */
         #mensajePersonalizadoContainer {
             position: fixed;
             bottom: 80px;
@@ -407,16 +394,16 @@
             padding: 15px;
             border-radius: 10px;
             box-shadow: 2px 2px 12px rgba(0,0,0,0.3);
-            width: 280px; /* Ancho ajustado */
+            width: 280px;
             display: none;
             z-index: 1101;
             font-size: 14px;
         }
 
         #mensajePersonalizadoContainer textarea {
-            width: calc(100% - 16px); /* Ajuste para padding */
+            width: calc(100% - 16px);
             height: 90px;
-            resize: vertical; /* Permite redimensionar verticalmente */
+            resize: vertical;
             padding: 8px;
             font-size: 14px;
             border: 1px solid #ccc;
@@ -429,7 +416,7 @@
             background-color: #25d366;
             color: white;
             border: none;
-            padding: 10px 15px; /* Más padding */
+            padding: 10px 15px;
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
@@ -442,18 +429,16 @@
             background-color: #1ebe57;
         }
 
-        /* Overlay para cerrar con clic afuera */
         #overlayPersonalizado {
             display: none;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: transparent; /* Fondo transparente */
+            background: transparent;
             z-index: 1000;
         }
 
-        /* --- Estilos para el modal de detalles del producto --- */
         .modal {
-            display: none; /* Oculto por defecto, JavaScript lo mostrará con 'flex' */
+            display: none;
             position: fixed;
             z-index: 2000;
             left: 0;
@@ -541,7 +526,6 @@
             margin-bottom: 20px;
         }
 
-        /* Estilos para la selección de color */
         .color-selector {
             margin-top: 20px;
             margin-bottom: 20px;
@@ -563,40 +547,38 @@
         .color-box {
             width: 40px;
             height: 40px;
-            border-radius: 50%; /* Cuadrados o círculos */
+            border-radius: 50%;
             border: 2px solid #ccc;
             cursor: pointer;
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
-            box-sizing: border-box; /* Incluye padding y border en el tamaño total */
+            box-sizing: border-box;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* Clases para los colores específicos */
         .color-box[data-color="rojo"] { background-color: #e74c3c; }
         .color-box[data-color="morado"] { background-color: #9b59b6; }
         .color-box[data-color="rosa"] { background-color: #ff9ff3; }
-        .color-box[data-color="blanco"] { background-color: #ffffff; border: 2px solid #999; } /* Blanco con borde para que se vea */
+        .color-box[data-color="blanco"] { background-color: #ffffff; border: 2px solid #999; }
         .color-box[data-color="negro"] { background-color: #333333; }
         .color-box[data-color="azul"] { background-color: #3498db; }
         .color-box[data-color="verde"] { background-color: #2ecc71; }
         .color-box[data-color="amarillo"] { background-color: #f1c40f; }
         .color-box[data-color="gris"] { background-color: #808080; }
         .color-box[data-color="multicolor"] {
-            background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3); /* Rainbow */
+            background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
         }
         .color-box[data-color="celeste"] { background-color: #87CEEB; }
 
 
         .color-box.selected {
-            border-color: #cc8b79; /* Borde más pronunciado al seleccionar */
-            box-shadow: 0 0 0 3px rgba(204, 139, 121, 0.5); /* Sombra de selección */
+            border-color: #cc8b79;
+            box-shadow: 0 0 0 3px rgba(204, 139, 121, 0.5);
         }
-        /* Icono de check para el color seleccionado */
         .color-box.selected::after {
-            content: '✔'; /* Unicode checkmark */
+            content: '✔';
             font-size: 20px;
             color: white;
             position: absolute;
@@ -604,14 +586,13 @@
             left: 50%;
             transform: translate(-50%, -50%);
             text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-            /* Para colores claros, el checkmark debería ser oscuro */
-            color: var(--check-color, white); /* Usar variable CSS para el color del check */
+            color: var(--check-color, white);
         }
         .color-box[data-color="blanco"].selected::after,
         .color-box[data-color="amarillo"].selected::after,
         .color-box[data-color="rosa"].selected::after,
         .color-box[data-color="celeste"].selected::after {
-            --check-color: #333; /* Color oscuro para el check en fondos claros */
+            --check-color: #333;
         }
 
 
@@ -621,70 +602,67 @@
             font-size: 1.2em;
         }
 
-        /* --- Ajustes responsivos para pantallas más pequeñas (MÓVIL) --- */
         @media (max-width: 768px) {
             .contenido {
                 margin-right: 0;
-                padding-top: 10px; /* Reducir el padding top en móvil para el contenido principal */
+                padding-top: 10px;
             }
             .contenido.carrito-abierto {
                 margin-right: 0;
             }
             .carrito {
                 width: 100%;
-                right: -100%; /* Esconde el carrito completamente */
+                right: -100%;
             }
             .carrito.abierto {
                 right: 0;
             }
 
-            /* --- Navbar en móvil --- */
             .navbar {
-                flex-direction: row; /* Mantener elementos en fila */
-                justify-content: space-between; /* Espaciar logo y botón */
+                flex-direction: row;
+                justify-content: space-between;
                 align-items: center;
                 padding: 10px 20px;
             }
             .navbar .logo {
                 text-align: left;
-                flex-grow: 0; /* No crece tanto en móvil */
+                flex-grow: 0;
             }
             .menu-toggle {
-                display: block; /* Mostrar el botón de hamburguesa en móvil */
+                display: block;
             }
             .nav-links {
-                display: none; /* Ocultar los enlaces por defecto */
+                display: none;
                 flex-direction: column;
                 width: 100%;
-                background-color: #cc8b79; /* Mismo color de fondo */
+                background-color: #cc8b79;
                 position: absolute;
-                top: 60px; /* Debajo de la barra de navegación */
+                top: 60px;
                 left: 0;
                 padding: 10px 0;
                 box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             }
             .nav-links.active {
-                display: flex; /* Mostrar enlaces cuando la clase 'active' está presente */
+                display: flex;
             }
             .navbar .nav-links a {
                 margin: 10px 20px;
-                display: block; /* Cada enlace en su propia línea */
+                display: block;
                 text-align: center;
             }
 
-            /* Ajustes para el Hero Section */
             .hero-section {
-                padding: 50px 15px; /* Menos padding en móvil */
+                padding: 50px 15px;
             }
             .hero-section h1 {
-                font-size: 2em; /* Texto más pequeño */
+                font-size: 2em;
             }
             .hero-section p {
                 font-size: 1.1em;
             }
 
             .productos-grid {
-                grid-template-columns: 1fr; /* Una columna en móviles */
+                grid-template-columns: 1fr;
             }
             .whatsapp-float {
                 right: 15px;
@@ -695,15 +673,15 @@
             }
             #btnToggleCarrito {
                 right: 15px;
-                bottom: 80px; /* Mover el botón del carrito para que no choque con el de WhatsApp */
+                bottom: 80px;
             }
             #mensajePersonalizadoContainer {
-                width: calc(100% - 40px); /* Ajuste para móviles */
+                width: calc(100% - 40px);
                 right: 20px;
                 bottom: 80px;
             }
             .modal-content {
-                flex-direction: column; /* Columna en móviles para el modal */
+                flex-direction: column;
                 width: 90%;
                 padding: 20px;
                 gap: 15px;
@@ -717,8 +695,7 @@
             .modal-details .modal-price {
                 font-size: 1.5em;
             }
-        }
-    </style>
+        </style>
 </head>
 <body>
 
@@ -757,21 +734,21 @@
                 </div>
 
                 <div class="producto">
-                    <img src="http://googleusercontent.com/image_generation_content/15" alt="Lana Celeste" />
+                    <img src="lanaceleste.png" alt="Lana Celeste" />
                     <h3>Lana Celeste</h3>
                     <p>$3.800</p>
                     <button class="boton" onclick="mostrarDetalles('Lana Celeste')">Ver Detalles</button>
                 </div>
 
                 <div class="producto">
-                    <img src="http://googleusercontent.com/image_generation_content/15" alt="Lana Morada" />
+                    <img src="lanamorada.png" alt="Lana Morada" />
                     <h3>Lana Morada</h3>
                     <p>$4.000</p>
                     <button class="boton" onclick="mostrarDetalles('Lana Morada')">Ver Detalles</button>
                 </div>
 
                 <div class="producto">
-                     <img src="http://googleusercontent.com/image_generation_content/15" alt="Lana Multicolor" />
+                     <img src="lanamulticolor.png" alt="Lana Multicolor" />
                     <h3>Lana Multicolor</h3>
                     <p>$4.200</p>
                     <button class="boton" onclick="mostrarDetalles('Lana Multicolor')">Ver Detalles</button>
@@ -828,7 +805,7 @@
         </div>
 
         <footer>
-            <p>Contacto: <a href="mailto:rcespinozahumada@gmail.com style="color:white;">rcespinozahumada@gmail.com</a></p>
+            <p>Contacto: <a href="mailto:rcespinozahumada@gmail.com" style="color:white;">rcespinozahumada@gmail.com</a></p>
             <p>&copy; 2025 Rayén y Küruf. Todos los derechos reservados.</p>
         </footer>
     </div>
@@ -879,7 +856,7 @@
                 <div class="color-selector" id="colorSelectorContainer" style="display: none;">
                     <label>Selecciona un color:</label>
                     <div class="color-options" id="colorOptions">
-                        </div>
+                    </div>
                 </div>
 
                 <button class="boton" id="modalAddToCartButton">Agregar al carrito</button>
@@ -888,11 +865,8 @@
     </div>
 
     <script>
-        // Objeto para almacenar los productos en el carrito
-        // La clave del carrito ahora será "Nombre del Producto - Color (si aplica)"
         const carrito = {};
 
-        // Base de datos de productos con sus precios, imágenes y descripciones
         const productosData = {
             "Lana Roja": { precio: 3500, img: "lanaroja.png", desc: "Lana 100% acrílica, ideal para todo tipo de proyectos de tejido. Suave al tacto y fácil de trabajar." },
             "Lana Celeste": { precio: 3800, img: "http://googleusercontent.com/image_generation_content/15", desc: "Lana premium en un hermoso tono celeste, perfecta para prendas de bebé o proyectos delicados. Hipoalergénica." },
@@ -900,369 +874,323 @@
             "Lana Multicolor": { precio: 4200, img: "http://googleusercontent.com/image_generation_content/15", desc: "Lana con patrones de color únicos que cambian al tejer. Crea piezas originales sin esfuerzo. 100gr." },
             "Gorro tejido": {
                 precio: 5000,
-                img: "http://googleusercontent.com/image_generation_content/19", // Imagen genérica de respaldo si no hay un color predeterminado
+                img: "http://googleusercontent.com/image_generation_content/19",
                 desc: "Gorro suave y cálido, tejido a mano con lana de oveja patagónica. Ideal para el frío invierno. Talla única.",
                 colores: [
                     { name: "rojo", file: "gorrorojo.png" },
                     { name: "multicolor", file: "gorromulticolor.png" },
                     { name: "morado", file: "gorromorado.png" },
-                   { name: "celeste", file: "gorroceleste.png" } // Puedes poner una imagen genérica para gorro celeste aquí si tienes una // Puedes poner una imagen genérica para gorro celeste aquí si tienes una
+                    { name: "celeste", file: "gorroceleste.png" }
                 ]
             },
             "Chaleco sin mangas": {
                 precio: 8000,
                 img: "http://googleusercontent.com/image_generation_content/17",
                 desc: "Chaleco sin mangas, ligero y versátil, perfecto para cualquier estación. Disponible en varias tallas y colores.",
-                colores: ["blanco", "negro", "azul", "verde", "amarillo"].map(c => ({name: c, file: `http://googleusercontent.com/image_generation_content/17`})) // Ejemplo: adaptar si tuvieras imágenes específicas
+                colores: [
+                    { name: "blanco", file: "http://googleusercontent.com/image_generation_content/17" },
+                    { name: "negro", file: "http://googleusercontent.com/image_generation_content/17" },
+                    { name: "azul", file: "http://googleusercontent.com/image_generation_content/17" },
+                    { name: "verde", file: "http://googleusercontent.com/image_generation_content/17" },
+                    { name: "amarillo", file: "http://googleusercontent.com/image_generation_content/17" }
+                ]
             },
             "Cuello tejido": {
                 precio: 6500,
                 img: "http://googleusercontent.com/image_generation_content/18",
                 desc: "Cuello cerrado de lana, muy abrigador y suave. Protege del viento y el frío con estilo. Talla única.",
-                colores: ["rojo", "negro", "blanco", "morado"].map(c => ({name: c, file: `http://googleusercontent.com/image_generation_content/18`})) // Ejemplo
+                colores: [
+                    { name: "rojo", file: "http://googleusercontent.com/image_generation_content/18" },
+                    { name: "negro", file: "http://googleusercontent.com/image_generation_content/18" },
+                    { name: "blanco", file: "http://googleusercontent.com/image_generation_content/18" },
+                    { name: "morado", file: "http://googleusercontent.com/image_generation_content/18" }
+                ]
             },
             "Bufanda tejida": {
                 precio: 6000,
                 img: "http://googleusercontent.com/image_generation_content/16",
-                desc: "Bufanda larga y ancha, tejida a mano con patrones únicos. Complemento ideal para cualquier atuendo invernal.",
-                colores: ["negro", "gris", "rojo", "azul"].map(c => ({name: c, file: `http://googleusercontent.com/image_generation_content/16`})) // Ejemplo
+                desc: "Bufanda clásica tejida a mano, suave y larga para mayor abrigo. Un accesorio esencial para el invierno.",
+                colores: [
+                    { name: "rojo", file: "http://googleusercontent.com/image_generation_content/16" },
+                    { name: "gris", file: "http://googleusercontent.com/image_generation_content/16" },
+                    { name: "azul", file: "http://googleusercontent.com/image_generation_content/16" }
+                ]
             }
         };
 
-        // Variable para almacenar el color seleccionado en el modal
+        let selectedProduct = null;
         let selectedColor = null;
 
-        // Función para formatear el monto a moneda chilena
-        function formatCurrency(amount) {
-            return new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP', minimumFractionDigits: 0 }).format(amount);
-        }
-
-        // Función para actualizar la visualización del carrito
-        function actualizarCarrito() {
-            const contenedor = document.getElementById("carrito-items");
-            contenedor.innerHTML = ""; // Limpiar el contenido actual del carrito
-            let total = 0; // Inicializar el total del carrito
-
-            const productosEnCarrito = Object.keys(carrito);
-            if (productosEnCarrito.length === 0) {
-                // Mostrar mensaje de carrito vacío si no hay productos
-                contenedor.innerHTML = "<p class='carrito-vacio'>Tu carrito está vacío.</p>";
-                document.getElementById('totalCarrito').textContent = "Total: " + formatCurrency(0);
+        function mostrarDetalles(nombreProducto) {
+            selectedProduct = productosData[nombreProducto];
+            if (!selectedProduct) {
+                console.error("Producto no encontrado:", nombreProducto);
                 return;
             }
 
-            productosEnCarrito.forEach(key => { // `key` ahora puede ser "Nombre del Producto - Color (si aplica)"
-                const cantidad = carrito[key];
-                // Separar el nombre del producto y el color si existe
-                const parts = key.split(' - ');
-                const nombreProductoBase = parts[0];
-                const colorSeleccionado = parts[1] || ''; // Si no hay color, es cadena vacía
+            document.getElementById('modalProductName').textContent = nombreProducto;
+            document.getElementById('modalProductPrice').textContent = `$${selectedProduct.precio.toLocaleString('es-CL')}`;
+            document.getElementById('modalProductDescription').textContent = selectedProduct.desc;
+            document.getElementById('modalProductImage').src = selectedProduct.img;
 
-                const precioUnitario = productosData[nombreProductoBase] ? productosData[nombreProductoBase].precio : 0;
-                const subtotalItem = cantidad * precioUnitario;
-                total += subtotalItem;
+            const colorSelectorContainer = document.getElementById('colorSelectorContainer');
+            const colorOptionsDiv = document.getElementById('colorOptions');
+            colorOptionsDiv.innerHTML = '';
+            selectedColor = null;
 
-                const displayName = colorSeleccionado ? `${nombreProductoBase} (${colorSeleccionado})` : nombreProductoBase;
-
-                const div = document.createElement("div");
-                div.className = "item-carrito";
-                div.innerHTML = `
-                    <strong>${displayName}</strong><br>
-                    <span>Cantidad: ${cantidad}</span><br>
-                    <span>Precio unitario: ${formatCurrency(precioUnitario)}</span><br>
-                    <span>Subtotal: ${formatCurrency(subtotalItem)}</span>
-                    <div class="acciones">
-                        <button onclick="incrementar('${key}')">+</button>
-                        <button onclick="decrementar('${key}')">-</button>
-                        <button class="eliminar" onclick="eliminar('${key}')">Eliminar</button>
-                    </div>
-                `;
-                contenedor.appendChild(div);
-            });
-            // Actualizar el total visible en el carrito
-            document.getElementById('totalCarrito').textContent = "Total: " + formatCurrency(total);
-        }
-
-        // Función para agregar un producto (con o sin color) al carrito
-        function agregarAlCarrito(productName, color = null) {
-            let key = productName;
-            if (color) {
-                key = `${productName} - ${color}`;
-            }
-
-            if (carrito[key]) {
-                carrito[key]++;
+            if (selectedProduct.colores && selectedProduct.colores.length > 0) {
+                colorSelectorContainer.style.display = 'block';
+                selectedProduct.colores.forEach(color => {
+                    const colorBox = document.createElement('div');
+                    colorBox.classList.add('color-box');
+                    colorBox.dataset.color = color.name;
+                    colorBox.style.backgroundColor = getCssColor(color.name);
+                    if (color.name === "blanco") {
+                        colorBox.style.border = "2px solid #999";
+                    }
+                    if (color.name === "multicolor") {
+                        colorBox.style.background = "linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3)";
+                    }
+                    colorBox.onclick = () => seleccionarColor(color.name);
+                    colorOptionsDiv.appendChild(colorBox);
+                });
             } else {
-                carrito[key] = 1;
+                colorSelectorContainer.style.display = 'none';
             }
-            actualizarCarrito();
-            abrirCarrito();
-            alert(`"${key}" añadido al carrito.`);
-        }
 
-        // Función para incrementar la cantidad de un producto en el carrito (usa la clave completa)
-        function incrementar(key) {
-            carrito[key]++;
-            actualizarCarrito();
-        }
-
-        // Función para decrementar la cantidad de un producto en el carrito (usa la clave completa)
-        function decrementar(key) {
-            if (carrito[key] > 1) {
-                carrito[key]--;
+            if (selectedProduct.colores && selectedProduct.colores.length > 0) {
+                seleccionarColor(selectedProduct.colores[0].name);
             } else {
-                eliminar(key);
-            }
-            actualizarCarrito();
-        }
-
-        // Función para eliminar un producto del carrito (usa la clave completa)
-        function eliminar(key) {
-            delete carrito[key];
-            actualizarCarrito();
-        }
-
-        // Función para enviar el pedido por WhatsApp
-        function enviarPorWhatsApp() {
-            const productos = Object.entries(carrito);
-            if (productos.length === 0) {
-                alert("Tu carrito está vacío. ¡Agrega algunos productos antes de enviar un pedido!");
-                return;
+                document.getElementById('modalProductImage').src = selectedProduct.img;
             }
 
-            let mensaje = "Hola Rayén y Küruf, me gustaría realizar el siguiente pedido:\n\n";
-            let totalPedido = 0;
 
-            productos.forEach(([key, cantidad]) => { // `key` es "Nombre - Color"
-                const parts = key.split(' - ');
-                const nombreProductoBase = parts[0];
-                const colorSeleccionado = parts[1] || '';
+            document.getElementById('productDetailsModal').style.display = 'flex';
+        }
 
-                const precioUnitario = productosData[nombreProductoBase] ? productosData[nombreProductoBase].precio : 0;
-                const subtotalItem = cantidad * precioUnitario;
-                totalPedido += subtotalItem;
-
-                const displayName = colorSeleccionado ? `${nombreProductoBase} (${colorSeleccionado})` : nombreProductoBase;
-                mensaje += `- ${cantidad} x ${displayName} (${formatCurrency(precioUnitario)} c/u) = ${formatCurrency(subtotalItem)}\n`;
+        function seleccionarColor(colorName) {
+            selectedColor = colorName;
+            const colorBoxes = document.querySelectorAll('.color-box');
+            colorBoxes.forEach(box => {
+                box.classList.remove('selected');
             });
 
-            mensaje += `\nTotal del pedido: ${formatCurrency(totalPedido)}\n`;
-            mensaje += "\nPor favor, confirmame la disponibilidad y el método de pago. ¡Gracias!";
+            const selectedBox = document.querySelector(`.color-box[data-color="${colorName}"]`);
+            if (selectedBox) {
+                selectedBox.classList.add('selected');
 
-            const numero = "56988612195"; // Número de WhatsApp sin el '+'
-            const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
-            window.open(url, "_blank");
-        }
-
-        // --- Funcionalidad para el mensaje personalizado de WhatsApp ---
-        const btnWhatsapp = document.getElementById('btnWhatsappPersonalizado');
-        const mensajeContainer = document.getElementById('mensajePersonalizadoContainer');
-        const overlay = document.getElementById('overlayPersonalizado');
-
-        function cerrarWhatsappFlotante() {
-            mensajeContainer.style.display = 'none';
-            overlay.style.display = 'none';
-        }
-
-        btnWhatsapp.addEventListener('click', () => {
-            cerrarCarrito();
-            cerrarDetalles();
-            cerrarMenuNavegacion();
-
-            if (mensajeContainer.style.display === 'block') {
-                cerrarWhatsappFlotante();
-            } else {
-                mensajeContainer.style.display = 'block';
-                overlay.style.display = 'block';
-                document.getElementById('mensajePersonalizado').focus();
+                const colorData = selectedProduct.colores.find(c => c.name === colorName);
+                if (colorData && colorData.file) {
+                    document.getElementById('modalProductImage').src = colorData.file;
+                } else {
+                    document.getElementById('modalProductImage').src = selectedProduct.img;
+                }
             }
-        });
-
-        overlay.addEventListener('click', () => {
-            cerrarWhatsappFlotante();
-        });
-
-        function enviarMensajePersonalizado() {
-            const texto = document.getElementById('mensajePersonalizado').value.trim();
-            if (!texto) {
-                alert("Por favor, escribe un mensaje antes de enviar.");
-                return;
-            }
-            const numero = "56988612195"; // Número de WhatsApp sin el '+'
-            const url = `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
-            window.open(url, "_blank");
-            document.getElementById('mensajePersonalizado').value = '';
-            cerrarWhatsappFlotante();
         }
 
-        // --- Funciones para abrir/cerrar el carrito lateral ---
-        const btnToggleCarrito = document.getElementById('btnToggleCarrito');
-        const carritoSidebar = document.getElementById('carritoSidebar');
-        const contenidoPrincipal = document.getElementById('contenidoPrincipal');
-        const btnSeguirComprando = document.getElementById('btnSeguirComprando');
+        function getCssColor(colorName) {
+            switch (colorName.toLowerCase()) {
+                case 'rojo': return '#e74c3c';
+                case 'morado': return '#9b59b6';
+                case 'rosa': return '#ff9ff3';
+                case 'blanco': return '#ffffff';
+                case 'negro': return '#333333';
+                case 'azul': return '#3498db';
+                case 'verde': return '#2ecc71';
+                case 'amarillo': return '#f1c40f';
+                case 'gris': return '#808080';
+                case 'celeste': return '#87CEEB';
+                case 'multicolor': return 'linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3)';
+                default: return '#ccc';
+            }
+        }
 
-        btnToggleCarrito.addEventListener('click', () => {
-            cerrarWhatsappFlotante();
-            cerrarDetalles();
-            cerrarMenuNavegacion();
 
-            if (carritoSidebar.classList.contains('abierto')) {
-                cerrarCarrito();
-            } else {
+        function cerrarDetalles() {
+            document.getElementById('productDetailsModal').style.display = 'none';
+        }
+
+        document.getElementById('modalAddToCartButton').addEventListener('click', () => {
+            if (selectedProduct) {
+                let itemName = document.getElementById('modalProductName').textContent;
+                let itemKey = itemName;
+
+                if (selectedProduct.colores && selectedProduct.colores.length > 0) {
+                    if (!selectedColor) {
+                        alert("Por favor, selecciona un color.");
+                        return;
+                    }
+                    itemKey = `${itemName} - ${selectedColor}`;
+                }
+
+                if (carrito[itemKey]) {
+                    carrito[itemKey].cantidad++;
+                } else {
+                    carrito[itemKey] = {
+                        nombre: itemName,
+                        precio: selectedProduct.precio,
+                        cantidad: 1,
+                        color: selectedColor
+                    };
+                }
+                actualizarCarrito();
+                cerrarDetalles();
                 abrirCarrito();
             }
         });
 
-        btnSeguirComprando.addEventListener('click', () => {
-            cerrarCarrito();
-        });
+        function actualizarCarrito() {
+            const carritoItemsDiv = document.getElementById('carrito-items');
+            carritoItemsDiv.innerHTML = '';
+            let total = 0;
+            let carritoVacio = true;
+
+            for (const itemKey in carrito) {
+                const item = carrito[itemKey];
+                if (item.cantidad > 0) {
+                    carritoVacio = false;
+                    const itemDiv = document.createElement('div');
+                    itemDiv.classList.add('item-carrito');
+                    itemDiv.innerHTML = `
+                        <span>${item.nombre} ${item.color ? `(${item.color})` : ''} - $${item.precio.toLocaleString('es-CL')} x ${item.cantidad}</span>
+                        <div class="acciones">
+                            <button onclick="cambiarCantidad('${itemKey}', 1)">+</button>
+                            <button onclick="cambiarCantidad('${itemKey}', -1)">-</button>
+                            <button class="eliminar" onclick="eliminarDelCarrito('${itemKey}')">Eliminar</button>
+                        </div>
+                    `;
+                    carritoItemsDiv.appendChild(itemDiv);
+                    total += item.precio * item.cantidad;
+                }
+            }
+
+            if (carritoVacio) {
+                carritoItemsDiv.innerHTML = '<p class="carrito-vacio">Tu carrito está vacío.</p>';
+            }
+
+            document.getElementById('totalCarrito').textContent = `Total: $${total.toLocaleString('es-CL')}`;
+        }
+
+        function cambiarCantidad(itemKey, cambio) {
+            if (carrito[itemKey]) {
+                carrito[itemKey].cantidad += cambio;
+                if (carrito[itemKey].cantidad <= 0) {
+                    delete carrito[itemKey];
+                }
+                actualizarCarrito();
+            }
+        }
+
+        function eliminarDelCarrito(itemKey) {
+            if (confirm(`¿Estás seguro de que quieres eliminar ${carrito[itemKey].nombre} del carrito?`)) {
+                delete carrito[itemKey];
+                actualizarCarrito();
+            }
+        }
+
+        function toggleCarrito() {
+            const carritoSidebar = document.getElementById('carritoSidebar');
+            const contenidoPrincipal = document.getElementById('contenidoPrincipal');
+            if (carritoSidebar.classList.contains('abierto')) {
+                carritoSidebar.classList.remove('abierto');
+                contenidoPrincipal.classList.remove('carrito-abierto');
+            } else {
+                carritoSidebar.classList.add('abierto');
+                contenidoPrincipal.classList.add('carrito-abierto');
+            }
+        }
 
         function abrirCarrito() {
-            carritoSidebar.classList.add('abierto');
-            contenidoPrincipal.classList.add('carrito-abierto');
+            const carritoSidebar = document.getElementById('carritoSidebar');
+            const contenidoPrincipal = document.getElementById('contenidoPrincipal');
+            if (!carritoSidebar.classList.contains('abierto')) {
+                carritoSidebar.classList.add('abierto');
+                contenidoPrincipal.classList.add('carrito-abierto');
+            }
         }
 
         function cerrarCarrito() {
-            carritoSidebar.classList.remove('abierto');
-            contenidoPrincipal.classList.remove('carrito-abierto');
-        }
-
-        // --- Funcionalidad del Modal de Detalles del Producto ---
-        const productDetailsModal = document.getElementById('productDetailsModal');
-        const modalProductName = document.getElementById('modalProductName');
-        const modalProductPrice = document.getElementById('modalProductPrice');
-        const modalProductDescription = document.getElementById('modalProductDescription');
-        const modalProductImage = document.getElementById('modalProductImage');
-        const modalAddToCartButton = document.getElementById('modalAddToCartButton');
-        const colorSelectorContainer = document.getElementById('colorSelectorContainer');
-        const colorOptionsDiv = document.getElementById('colorOptions');
-
-        let currentProductForModal = null; // Variable para saber qué producto se está viendo en el modal
-
-        function mostrarDetalles(productName) {
-            cerrarCarrito();
-            cerrarWhatsappFlotante();
-            cerrarMenuNavegacion();
-
-            const product = productosData[productName];
-            if (!product) return;
-
-            modalProductName.textContent = productName;
-            modalProductPrice.textContent = formatCurrency(product.precio);
-            modalProductDescription.textContent = product.desc;
-
-            // Lógica para establecer la imagen inicial del modal
-            if (productName === 'Lana Roja') {
-                modalProductImage.src = 'lanaroja.png';
-            } else if (productName === 'Gorro tejido') {
-                // Si el gorro tiene colores definidos, intenta usar el archivo del primer color
-                if (product.colores && product.colores.length > 0 && product.colores[0].file) {
-                    modalProductImage.src = product.colores[0].file;
-                } else {
-                    modalProductImage.src = product.img; // Usa la imagen genérica del producto si no hay colores específicos
-                }
-            } else {
-                modalProductImage.src = product.img; // Para los demás productos, usa la imagen de los datos
-            }
-
-
-            currentProductForModal = productName;
-            selectedColor = null; // Reiniciar el color seleccionado cada vez que se abre un modal
-
-            // --- Lógica para mostrar/ocultar y generar selectores de color ---
-            if (product.colores && product.colores.length > 0) {
-                colorSelectorContainer.style.display = 'block'; // Mostrar el contenedor de colores
-                colorOptionsDiv.innerHTML = ''; // Limpiar opciones anteriores
-
-                product.colores.forEach(colorObj => { // Iterar sobre los objetos de color
-                    const colorBox = document.createElement('div');
-                    colorBox.className = 'color-box';
-                    colorBox.dataset.color = colorObj.name; // Usar el nombre del color
-                    colorBox.title = colorObj.name.charAt(0).toUpperCase() + colorObj.name.slice(1);
-
-                    // Establecer el color de fondo del cuadro de color
-                    // Esto asume que tienes reglas CSS para cada color-box[data-color="x"]
-                    // o que quieres que el JS lo ponga. Para colores complejos como multicolor, CSS es mejor.
-                    // Si no, podrías hacer: colorBox.style.backgroundColor = colorObj.name;
-                    // O definir un mapeo de nombres de colores a códigos HEX si no es un nombre directo de CSS.
-
-                    colorBox.addEventListener('click', () => {
-                        document.querySelectorAll('.color-box').forEach(box => {
-                            box.classList.remove('selected');
-                        });
-                        colorBox.classList.add('selected');
-                        selectedColor = colorObj.name; // Almacenar solo el nombre del color
-                        // ¡Actualizar la imagen del modal cuando se selecciona un color!
-                        if (colorObj.file) { // Si el objeto color tiene una ruta de archivo específica
-                             modalProductImage.src = colorObj.file;
-                        } else {
-                             modalProductImage.src = product.img; // Fallback si no hay imagen específica para ese color
-                        }
-                    });
-                    colorOptionsDiv.appendChild(colorBox);
-                });
-            } else {
-                colorSelectorContainer.style.display = 'none'; // Ocultar si no hay colores
-            }
-
-            // Asignar el evento al botón "Agregar al carrito" dentro del modal
-            modalAddToCartButton.onclick = () => {
-                // Verificar si es un producto con colores y si se ha seleccionado uno
-                if (product.colores && product.colores.length > 0 && !selectedColor) {
-                    alert('Por favor, selecciona un color antes de agregar al carrito.');
-                    return;
-                }
-                agregarAlCarrito(currentProductForModal, selectedColor);
-                cerrarDetalles(); // Cierra el modal después de agregar al carrito
-            };
-
-            productDetailsModal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function cerrarDetalles() {
-            productDetailsModal.style.display = 'none';
-            document.body.style.overflow = ''; // Restaura el scroll del cuerpo
-            currentProductForModal = null; // Reiniciar la variable
-            selectedColor = null; // Reiniciar el color seleccionado
-            // Limpiar selección visual al cerrar el modal
-            document.querySelectorAll('.color-box').forEach(box => {
-                box.classList.remove('selected');
-            });
-        }
-
-        // Cierra el modal si se hace clic fuera del contenido del modal
-        window.onclick = function(event) {
-            if (event.target == productDetailsModal) {
-                cerrarDetalles();
+            const carritoSidebar = document.getElementById('carritoSidebar');
+            const contenidoPrincipal = document.getElementById('contenidoPrincipal');
+            if (carritoSidebar.classList.contains('abierto')) {
+                carritoSidebar.classList.remove('abierto');
+                contenidoPrincipal.classList.remove('carrito-abierto');
             }
         }
 
-        // --- Lógica para el menú de hamburguesa en móvil ---
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
+        document.getElementById('btnToggleCarrito').addEventListener('click', toggleCarrito);
+        document.getElementById('btnSeguirComprando').addEventListener('click', cerrarCarrito);
 
-        function cerrarMenuNavegacion() {
-            navLinks.classList.remove('active');
-        }
 
-        menuToggle.addEventListener('click', () => {
-            cerrarCarrito();
-            cerrarWhatsappFlotante();
-            cerrarDetalles();
-
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('active');
         });
 
-        navLinks.querySelectorAll('a').forEach(link => {
+        document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
-                cerrarMenuNavegacion();
+                const navLinks = document.getElementById('navLinks');
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                }
             });
         });
 
-        // Inicializa el carrito vacío al cargar la página
-        actualizarCarrito();
-    </script>
 
+        function enviarPorWhatsApp() {
+            let mensaje = "¡Hola! Me gustaría hacer un pedido con los siguientes productos:\n\n";
+            let totalPedido = 0;
+            let hayProductos = false;
+
+            for (const itemKey in carrito) {
+                const item = carrito[itemKey];
+                if (item.cantidad > 0) {
+                    hayProductos = true;
+                    mensaje += `- ${item.nombre} ${item.color ? `(${item.color})` : ''}: ${item.cantidad} x $${item.precio.toLocaleString('es-CL')}\n`;
+                    totalPedido += item.cantidad * item.precio;
+                }
+            }
+
+            if (!hayProductos) {
+                alert("Tu carrito está vacío. Agrega productos antes de enviar un pedido.");
+                return;
+            }
+
+            mensaje += `\nTotal del pedido: $${totalPedido.toLocaleString('es-CL')}`;
+
+            const numeroWhatsApp = "+56987654321";
+            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+            window.open(urlWhatsApp, '_blank');
+        }
+
+        document.getElementById('btnWhatsappPersonalizado').addEventListener('click', function() {
+            document.getElementById('mensajePersonalizadoContainer').style.display = 'block';
+            document.getElementById('overlayPersonalizado').style.display = 'block';
+        });
+
+        document.getElementById('overlayPersonalizado').addEventListener('click', function() {
+            document.getElementById('mensajePersonalizadoContainer').style.display = 'none';
+            document.getElementById('overlayPersonalizado').style.display = 'none';
+        });
+
+        function enviarMensajePersonalizado() {
+            const mensaje = document.getElementById('mensajePersonalizado').value;
+            if (mensaje.trim() === "") {
+                alert("Por favor, escribe tu mensaje.");
+                return;
+            }
+
+            const numeroWhatsApp = "+56987654321";
+            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+            window.open(urlWhatsApp, '_blank');
+
+            document.getElementById('mensajePersonalizado').value = '';
+            document.getElementById('mensajePersonalizadoContainer').style.display = 'none';
+            document.getElementById('overlayPersonalizado').style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', actualizarCarrito);
+
+    </script>
 </body>
 </html>
